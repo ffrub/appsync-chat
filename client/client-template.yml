@@ -1,0 +1,42 @@
+Resources:
+  AppsyncBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: appsync-chat
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      AccessControl: PublicRead
+    DeletionPolicy: Retain
+
+  AppsyncChatDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: !GetAtt AppsyncChatBucket.DomainName
+            Id: AppsyncChatOrigin
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultCacheBehavior:
+          TargetOriginId: AppsyncChatOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          ForwardedValues:
+            QueryString: 'false'
+          MinTTL: 0
+          MaxTTL: 86400
+          DefaultTTL: 86400
+        Enabled: 'true'
+        Comment: CloudFront distribution for the appsync-chat app
+    DependsOn:
+      - AppsyncChatBucket
+
+Outputs:
+  AppsyncChatBucketName:
+    Description: The name of the S3 bucket hosting the appsync-chat client
+    Value: !Ref AppsyncChatBucket
+
+  AppsyncChatDistributionDomainName:
+    Description: The CloudFront distribution domain name
+    Value: !GetAtt AppsyncChatDistribution.DomainName
+

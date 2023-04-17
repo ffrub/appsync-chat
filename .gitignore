@@ -1,0 +1,27 @@
+# CLIENT
+client/node_modules
+client/dist
+
+# SERVER
+# Binaries for programs and plugins
+server/**/*.exe
+server/**/*.exe~
+server/**/*.dll
+server/**/*.so
+server/**/*.dylib
+
+# Packages
+server/**/*.zip
+
+# Lambda binaries
+server/**/*bootstrap
+
+# Test binary, built with `go test -c`
+server/**/*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+server/**/*.out
+
+
+# GENERAL
+**/.DS_Store

@@ -1,0 +1,43 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Chatroom {
+  avatarUrl: String
+  id: String!
+  messages: [Message!]!
+  name: String!
+  users: [User!]!
+}
+
+type Message {
+  chatroomId: String!
+  createdAt: Int!
+  createdBy: String!
+  id: String!
+  text: String!
+}
+
+type Mutation {
+  addMessage(chatroomId: String!, text: String!): Message
+}
+
+type Query {
+  chatroom(id: String!): Chatroom
+  chatrooms: [Chatroom]
+  messages(chatroomId: String!): [Message]
+  users(chatroomId: String!): [User]
+}
+
+type Subscription {
+  onAddMessage(chatroomId: String!): Message @aws_subscribe(mutations : ["addMessage"])
+}
+
+type User {
+  avatarUrl: String
+  displayName: String!
+  id: String!
+  isOwner: Boolean
+}

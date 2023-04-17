@@ -1,0 +1,5 @@
+{
+  "clientId": "solid-chat",
+  "realm": "chat",
+  "url": "http://localhost:8080/"
+}
