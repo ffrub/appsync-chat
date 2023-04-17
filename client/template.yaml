@@ -1,8 +1,8 @@
 Resources:
-  AppsyncBucket:
+  AppsyncChatBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: appsync-chat
+      BucketName: appsync-chat-ffrub
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
