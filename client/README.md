@@ -36,3 +36,5 @@ You can deploy the `dist` folder to any static host provider (netlify, surge, no
 ## Some change
 
 I make this change, so main is ahead of develop. Then I want to see what happens to main when I backmerge it into develop.
+
+Some more changes in main, that are not in develop yet.
