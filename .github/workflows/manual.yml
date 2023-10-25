@@ -17,5 +17,6 @@ jobs:
        with:
          ref: ${{ github.ref }}
      - uses: actions/setup-node@v3
-     - run: git branch --show-current
+     - run: git checkout -b release-$(date +%d.%m.%y)
+     - run: gh pr create --base main --title feat: release-$(date +%d.%m.%y)
     
