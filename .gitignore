@@ -2,6 +2,9 @@
 client/node_modules
 client/dist
 
+# TMP
+tmp/**/*
+
 # SERVER
 # Binaries for programs and plugins
 server/**/*.exe
