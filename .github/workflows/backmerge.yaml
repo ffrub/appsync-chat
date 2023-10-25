@@ -1,0 +1,27 @@
+name: Backmerge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  backmerge:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: ['develop', 'test']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          ref: ${{ matrix.branch }}
+          # fetch all commits - by default only 1 commit is fetched
+          fetch-depth: 0
+
+      - name: fetch all
+        run: git fetch --all
+
+      - name: merge main into ${{ matrix.branch }}
+        run: git merge --ff-only origin/main
+
