@@ -1,26 +1,18 @@
-# This is a basic workflow that is manually triggered
-
 name: Create Release PR
 
 on: workflow_dispatch
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   create_pr:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
      - uses: actions/checkout@v3
        with:
-         ref: ${{ github.ref }}
+         fetch-depth: 0
      - uses: actions/setup-node@v3
-     - run: git fetch --all
      - run: git checkout -b release-$(date +%d.%m.%y)
      - run: git push --set-upstream origin release-$(date +%d.%m.%y)
-       env:
-         GH_TOKEN: ${{ github.token }}
      - name: Create PR
        env:
          GH_TOKEN: ${{ github.token }}
