@@ -9,8 +9,6 @@ jobs:
   # This workflow contains a single job called "greet"
   create_pr:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
