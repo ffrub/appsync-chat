@@ -25,3 +25,9 @@ jobs:
       - name: merge main into ${{ matrix.branch }}
         run: git merge --ff-only origin/main
 
+      - name: push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git push origin ${{ matrix.branch }}
+
