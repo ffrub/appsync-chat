@@ -20,7 +20,8 @@ jobs:
      - uses: actions/setup-node@v3
      - run: git fetch --all
      - run: git checkout -b release-$(date +%d.%m.%y)
+     - run: git push --set-upstream origin release-$(date +%d.%m.%y)
      - run: |
-         gh pr create --head release-$(date +%d.%m.%y) --base main --title "feat: release-$(date +%d.%m.%y)" --body "$(git shortlog origin/main..HEAD)"
+         gh pr create --base main --title "feat: release-$(date +%d.%m.%y)" --body "$(git shortlog origin/main..HEAD)"
        env:
          GH_TOKEN: ${{ github.token }}
