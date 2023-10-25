@@ -1,0 +1,20 @@
+name: Create Release PR
+
+on: workflow_dispatch
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+     - uses: actions/checkout@v3
+       with:
+         fetch-depth: 0
+     - uses: actions/setup-node@v3
+     - run: git checkout -b release-$(date +%d.%m.%y)
+     - run: git push --set-upstream origin release-$(date +%d.%m.%y)
+     - name: Create PR
+       env:
+         GH_TOKEN: ${{ github.token }}
+       run: |
+          gh pr create --base main --title "feat: release-$(date +%d.%m.%y)" --body "$(git shortlog origin/main..HEAD)"
