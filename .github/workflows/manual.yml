@@ -19,6 +19,6 @@ jobs:
      - uses: actions/setup-node@v3
      - run: git checkout -b release-$(date +%d.%m.%y)
      - run: |
-         gh pr create --base main --title "feat: release-$(date +%d.%m.%y)"
+         gh pr create --base main --title "feat: release-$(date +%d.%m.%y)" --body "$(git shortlog origin/main..HEAD)"
        env:
          GH_TOKEN: ${{ github.token }}
