@@ -8,9 +8,11 @@ on: workflow_dispatch
 jobs:
   # This workflow contains a single job called "greet"
   create_pr:
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -23,5 +25,3 @@ jobs:
      - run: git push --set-upstream origin release-$(date +%d.%m.%y)
      - run: |
          gh pr create --base main --title "feat: release-$(date +%d.%m.%y)" --body "$(git shortlog origin/main..HEAD)"
-       env:
-         GH_TOKEN: ${{ github.token }}
